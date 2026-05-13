@@ -77,8 +77,11 @@ export default function App() {
     try {
       await sendCardNotification({ number: id, title, description });
       toast.success('Notificação enviada!');
-    } catch (err) {
-      toast.error(`Erro ao enviar email: ${String(err)}`);
+    } catch (err: unknown) {
+      const msg = typeof err === 'object' && err !== null
+        ? JSON.stringify(err)
+        : String(err);
+      toast.error(`Erro: ${msg}`);
     }
   }, [activeCardId]);
 
