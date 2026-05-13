@@ -18,6 +18,6 @@ export async function sendCardNotification(card: {
       card_title: card.title,
       card_description: card.description,
     },
-    PUBLIC_KEY
+    { publicKey: PUBLIC_KEY }
   );
 }
