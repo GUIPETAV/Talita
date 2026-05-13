@@ -37,7 +37,7 @@ export function ExperienceCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: number * 0.02 }}
-      className={`h-80 ${isCompleted || isBlocked ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+      className={`h-96 ${isCompleted || isBlocked ? 'cursor-not-allowed' : 'cursor-pointer'}`}
       style={{ perspective: '1000px' }}
       onClick={handleClick}
     >
@@ -134,34 +134,25 @@ export function ExperienceCard({
               </span>
             </div>
 
-            <div className="flex-1 flex flex-col justify-center items-center text-center px-2">
-              <div className="bg-primary/15 p-4 rounded-full mb-4">
-                <Icon className="w-10 h-10 text-primary" strokeWidth={1.5} />
+            <div className="flex-1 flex flex-col justify-center items-center text-center px-2 gap-3">
+              <div className="bg-primary/15 p-3 rounded-full">
+                <Icon className="w-7 h-7 text-primary" strokeWidth={1.5} />
               </div>
 
               <h3
-                className="mb-4"
-                style={{ fontFamily: 'Georgia, serif', fontSize: '1.2rem', fontWeight: 500, color: '#6b5444' }}
+                style={{ fontFamily: 'Georgia, serif', fontSize: '1.05rem', fontWeight: 500, color: '#6b5444', lineHeight: 1.3 }}
               >
                 {title}
               </h3>
 
               <p
-                className="text-sm leading-relaxed mb-4"
+                className="text-xs leading-relaxed"
                 style={{ fontFamily: 'Georgia, serif', color: '#6b5444', fontStyle: 'italic' }}
               >
                 {description}
               </p>
 
-              <div className="flex items-center gap-2 mb-4">
-                <Heart className="w-5 h-5 text-primary fill-primary" />
-                <span
-                  className="text-xs"
-                  style={{ fontFamily: 'Georgia, serif', color: '#9a8777', fontStyle: 'italic' }}
-                >
-                  Uma experiência especial
-                </span>
-              </div>
+              <Heart className="w-4 h-4 text-primary fill-primary" />
             </div>
 
             <button
