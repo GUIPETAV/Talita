@@ -1,6 +1,7 @@
+import { useState, useCallback } from 'react';
 import { Heart, Coffee, Camera, Music, Book, Plane, Star, Moon, Sun, Sparkles, Gift, MessageCircle, Home, MapPin, Utensils, Film, Palette, Headphones, TreePine, Waves, Mountain, Flower2, Cake, Clock, Key, Umbrella, Watch, Glasses, Bookmark, Navigation, Feather, Award, Music2 } from 'lucide-react';
-import { ExperienceCard } from './components/ExperienceCard';
 import { ExperienceGroup } from './components/ExperienceGroup';
+import { sendCardNotification } from './emailService';
 
 const experienceGroups = [
   {
@@ -62,6 +63,24 @@ const experienceGroups = [
 ];
 
 export default function App() {
+  const [activeCardId, setActiveCardId] = useState<number | null>(null);
+  const [completedCardIds, setCompletedCardIds] = useState<Set<number>>(new Set());
+
+  const handleSelect = useCallback(async (id: number, title: string, description: string) => {
+    if (activeCardId !== null) return;
+    setActiveCardId(id);
+    try {
+      await sendCardNotification({ number: id, title, description });
+    } catch {
+      // email failure doesn't block the UI
+    }
+  }, [activeCardId]);
+
+  const handleComplete = useCallback((id: number) => {
+    setCompletedCardIds((prev) => new Set(prev).add(id));
+    setActiveCardId(null);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <header className="py-20 px-4">
@@ -96,6 +115,10 @@ export default function App() {
               key={group.id}
               title={group.title}
               experiences={group.experiences}
+              activeCardId={activeCardId}
+              completedCardIds={completedCardIds}
+              onSelect={handleSelect}
+              onComplete={handleComplete}
             />
           ))}
         </div>

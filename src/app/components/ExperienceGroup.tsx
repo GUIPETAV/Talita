@@ -11,9 +11,20 @@ interface Experience {
 interface ExperienceGroupProps {
   title: string;
   experiences: Experience[];
+  activeCardId: number | null;
+  completedCardIds: Set<number>;
+  onSelect: (id: number, title: string, description: string) => void;
+  onComplete: (id: number) => void;
 }
 
-export function ExperienceGroup({ title, experiences }: ExperienceGroupProps) {
+export function ExperienceGroup({
+  title,
+  experiences,
+  activeCardId,
+  completedCardIds,
+  onSelect,
+  onComplete,
+}: ExperienceGroupProps) {
   return (
     <section className="space-y-8">
       <div className="text-center">
@@ -23,7 +34,7 @@ export function ExperienceGroup({ title, experiences }: ExperienceGroupProps) {
             fontFamily: 'Georgia, serif',
             fontStyle: 'italic',
             color: '#d4a574',
-            fontWeight: 400
+            fontWeight: 400,
           }}
         >
           {title}
@@ -39,6 +50,11 @@ export function ExperienceGroup({ title, experiences }: ExperienceGroupProps) {
             description={experience.description}
             icon={experience.icon}
             number={experience.id}
+            isActive={activeCardId === experience.id}
+            isCompleted={completedCardIds.has(experience.id)}
+            isBlocked={activeCardId !== null && activeCardId !== experience.id}
+            onSelect={() => onSelect(experience.id, experience.title, experience.description)}
+            onComplete={() => onComplete(experience.id)}
           />
         ))}
       </div>
