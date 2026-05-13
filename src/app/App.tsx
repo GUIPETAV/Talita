@@ -26,7 +26,7 @@ const experienceGroups = [
       { id: 9, title: "Piquenique no Parque da Cidade ", icon: Sun, description: "Fazer um piquenique com queijo e frutas pro nosso ratinho" },
       { id: 10, title: "Passeio na praia a noite", icon: Moon, description: "Caminhar no calçadão de Camburi a noite" },
       { id: 11, title: "Noite de Estrelas num chalé ", icon: Star, description: "Observar as estrelas sob o céu noturno num chalé que funcione a hidormassagem" },
-      { id: 12, title: "Passeio no Parque", icon: TreePine, description: "Natureza e ar fresco" },
+      { id: 12, title: "Passeio no Parque Pedra dsa cebola ", icon: TreePine, description: "Natureza e ar fresco" },
       { id: 13, title: "Dia na Praia", icon: Waves, description: "Sol, mar e amor" },
       { id: 14, title: "Quadriciclo na montanha", icon: Mountain, description: "Aventura, superação, risadas e muito estresse" },
       { id: 15, title: "Passeio no museu Melo leitão", icon: Flower2, description: "Apreciar a beleza da natureza" },
@@ -35,26 +35,26 @@ const experienceGroups = [
   },
   {
     id: 3,
-    title: "Expressões Criativas",
+    title: "Expressões Criativas e surpresas gastronômicas",
     experiences: [
-      { id: 17, title: "Sessão de Fotos", icon: Camera, description: "Capturar momentos inesquecíveis juntos com minha enorme habilidade com câmeras" },
-      { id: 18, title: "Pintar bob goodies Juntos", icon: Palette, description: "Expressar amor através da arte" },
+      { id: 17, title: "Vale uma sobremesa misteriosa", icon: Cake, description: "Vale uma sobremesa que você não espera" },
+      { id: 18, title: "Pintar Bob Goodies Juntos", icon: Palette, description: "Expressar amor através da arte" },
       { id: 19, title: "Ouvir Música", icon: Headphones, description: "Descobrir novas canções juntos" },
       { id: 20, title: "Cartas de Amor", icon: Bookmark, description: "Declarar nossa admiração de forma espontãnea" },
-      { id: 21, title: "Escrever Poemas", icon: Feather, description: "Versos dedicados ao amor" },
+      { id: 21, title: "Escrever Poemas", icon: Feather, description: "Vale um poema do tipo soneto escrito por mim" },
       { id: 22, title: "Conversa Profunda", icon: MessageCircle, description: "Compartilhar sentimentos verdadeiros" },
       { id: 23, title: "Relembrar Memórias", icon: Watch, description: "Revisitar nossos momentos favoritos" },
-      { id: 24, title: "Tempo de Qualidade", icon: Clock, description: "Apenas nós dois, sem pressa" }
+      { id: 24, title: "Tempo de Qualidade", icon: Clock, description: "Apenas nós dois, sem pressa e sem celular" }
     ]
   },
   {
     id: 4,
     title: "Descobertas e Surpresas",
     experiences: [
-      { id: 25, title: "Viagem Surpresa", icon: Plane, description: "Aventura para um lugar especial que eu vou deidir" },
+      { id: 25, title: "Viagem Surpresa", icon: Plane, description: "Aventura para um lugar especial que eu vou decidir" },
       { id: 26, title: "Explorar Lugares", icon: MapPin, description: "Descobrir novos cantinhos da cidade" },
-      { id: 27, title: "Troca de Presentes", icon: Gift, description: "Surpresas que aquecem o coração" },
-      { id: 28, title: "Momento Mágico", icon: Sparkles, description: "Criar memórias especiais" },
+      { id: 27, title: "Troca de Presentes", icon: Gift, description: "Vale um presente surpresa" },
+      { id: 28, title: "Momento Mágico", icon: Sparkles, description: " Uma surpresa marcante" },
       { id: 29, title: "Escapada Romântica", icon: Key, description: "Um refúgio só nosso" },
       { id: 30, title: "Dançar na Zilda", icon: Umbrella, description: "Aproveitar cada momento" },
       { id: 31, title: "Nova Aventura", icon: Navigation, description: "Explorar o desconhecido juntos" },
