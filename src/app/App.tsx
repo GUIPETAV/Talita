@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { Heart, Coffee, Camera, Music, Book, Plane, Star, Moon, Sun, Sparkles, Gift, MessageCircle, Home, MapPin, Utensils, Film, Palette, Headphones, TreePine, Waves, Mountain, Flower2, Cake, Clock, Key, Umbrella, Watch, Glasses, Bookmark, Navigation, Feather, Award, Music2 } from 'lucide-react';
 import { ExperienceGroup } from './components/ExperienceGroup';
 import { sendCardNotification } from './emailService';
@@ -65,6 +65,10 @@ const experienceGroups = [
 export default function App() {
   const [activeCardId, setActiveCardId] = useState<number | null>(null);
   const [completedCardIds, setCompletedCardIds] = useState<Set<number>>(new Set());
+  const [showResetModal, setShowResetModal] = useState(false);
+  const [resetPassword, setResetPassword] = useState('');
+  const [resetError, setResetError] = useState(false);
+  const passwordInputRef = useRef<HTMLInputElement>(null);
 
   const handleSelect = useCallback(async (id: number, title: string, description: string) => {
     if (activeCardId !== null) return;
@@ -80,6 +84,20 @@ export default function App() {
     setCompletedCardIds((prev) => new Set(prev).add(id));
     setActiveCardId(null);
   }, []);
+
+  const handleResetSubmit = () => {
+    if (resetPassword === 'dante') {
+      setActiveCardId(null);
+      setCompletedCardIds(new Set());
+      setShowResetModal(false);
+      setResetPassword('');
+      setResetError(false);
+    } else {
+      setResetError(true);
+      setResetPassword('');
+      passwordInputRef.current?.focus();
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -130,8 +148,62 @@ export default function App() {
           <p className="text-muted-foreground" style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic' }}>
             Feito com amor e carinho
           </p>
+          <button
+            type="button"
+            onClick={() => { setShowResetModal(true); setResetError(false); setResetPassword(''); }}
+            className="mt-6 text-xs text-muted-foreground/30 hover:text-muted-foreground/60 transition-colors"
+            style={{ fontFamily: 'Georgia, serif' }}
+          >
+            ·
+          </button>
         </div>
       </footer>
+
+      {showResetModal && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
+          <div className="bg-card rounded-3xl p-8 shadow-xl border border-primary/20 w-full max-w-sm">
+            <h3 className="text-center mb-6" style={{ fontFamily: 'Georgia, serif', color: '#6b5444', fontSize: '1.2rem' }}>
+              Resetar experiências
+            </h3>
+            <input
+              ref={passwordInputRef}
+              type="password"
+              value={resetPassword}
+              onChange={(e) => { setResetPassword(e.target.value); setResetError(false); }}
+              onKeyDown={(e) => e.key === 'Enter' && handleResetSubmit()}
+              placeholder="Senha"
+              autoFocus
+              className={`w-full px-4 py-3 rounded-2xl border text-center bg-background outline-none transition-colors ${
+                resetError ? 'border-red-400' : 'border-primary/30 focus:border-primary/60'
+              }`}
+              style={{ fontFamily: 'Georgia, serif', color: '#6b5444' }}
+            />
+            {resetError && (
+              <p className="text-xs text-red-400 text-center mt-2" style={{ fontFamily: 'Georgia, serif' }}>
+                Senha incorreta
+              </p>
+            )}
+            <div className="flex gap-3 mt-6">
+              <button
+                type="button"
+                onClick={() => setShowResetModal(false)}
+                className="flex-1 py-3 rounded-2xl border border-primary/30 text-sm transition-colors hover:bg-primary/5"
+                style={{ fontFamily: 'Georgia, serif', color: '#9a8777' }}
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                onClick={handleResetSubmit}
+                className="flex-1 py-3 rounded-2xl bg-primary/10 border border-primary/30 text-sm transition-colors hover:bg-primary/20"
+                style={{ fontFamily: 'Georgia, serif', color: '#6b5444' }}
+              >
+                Confirmar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
