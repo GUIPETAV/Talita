@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef } from 'react';
+import { toast } from 'sonner';
 import { Heart, Coffee, Camera, Music, Book, Plane, Star, Moon, Sun, Sparkles, Gift, MessageCircle, Home, MapPin, Utensils, Film, Palette, Headphones, TreePine, Waves, Mountain, Flower2, Cake, Clock, Key, Umbrella, Watch, Glasses, Bookmark, Navigation, Feather, Award, Music2 } from 'lucide-react';
 import { ExperienceGroup } from './components/ExperienceGroup';
 import { sendCardNotification } from './emailService';
@@ -75,8 +76,9 @@ export default function App() {
     setActiveCardId(id);
     try {
       await sendCardNotification({ number: id, title, description });
-    } catch {
-      // email failure doesn't block the UI
+      toast.success('Notificação enviada!');
+    } catch (err) {
+      toast.error(`Erro ao enviar email: ${String(err)}`);
     }
   }, [activeCardId]);
 
