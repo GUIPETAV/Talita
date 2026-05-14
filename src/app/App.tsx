@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from 'react';
 import { toast } from 'sonner';
-import { Heart, Coffee, Camera, Music, Book, Plane, Star, Moon, Sun, Sparkles, Gift, MessageCircle, Home, MapPin, Utensils, Film, Palette, Headphones, TreePine, Waves, Mountain, Flower2, Cake, Clock, Key, Umbrella, Watch, Glasses, Bookmark, Navigation, Feather, Award, Music2 } from 'lucide-react';
+import { Heart, Coffee, Camera, Music, Book, Plane, Star, Moon, Sun, Sparkles, Gift, MessageCircle, Home, MapPin, Utensils, Film, Palette, Headphones, TreePine, Waves, Mountain, Flower2, Cake, Clock, Key, Umbrella, Watch, Glasses, Bookmark, Navigation, Feather, Award, Music2, HelpCircle, X } from 'lucide-react';
 import { ExperienceGroup } from './components/ExperienceGroup';
 import { sendCardNotification } from './emailService';
 
@@ -67,6 +67,7 @@ export default function App() {
   const [activeCardId, setActiveCardId] = useState<number | null>(null);
   const [completedCardIds, setCompletedCardIds] = useState<Set<number>>(new Set());
   const [showResetModal, setShowResetModal] = useState(false);
+  const [showRulesModal, setShowRulesModal] = useState(false);
   const [resetPassword, setResetPassword] = useState('');
   const [resetError, setResetError] = useState(false);
   const passwordInputRef = useRef<HTMLInputElement>(null);
@@ -109,9 +110,19 @@ export default function App() {
       <header className="py-20 px-4">
         <div className="max-w-6xl mx-auto text-center">
           <div className="mb-8">
-            <p className="text-6xl mb-4" style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontWeight: 300, color: '#d4a574' }}>
-              32 experiências
-            </p>
+            <div className="inline-flex items-center gap-3">
+              <p className="text-6xl" style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontWeight: 300, color: '#d4a574' }}>
+                32 experiências
+              </p>
+              <button
+                type="button"
+                onClick={() => setShowRulesModal(true)}
+                className="text-primary/40 hover:text-primary/80 transition-colors mt-2"
+                aria-label="Ver regras"
+              >
+                <HelpCircle className="w-7 h-7" />
+              </button>
+            </div>
             <h1 className="text-4xl tracking-wide" style={{ fontFamily: 'Georgia, serif', letterSpacing: '0.1em', color: '#9a8777' }}>
               PARA A TALITA
             </h1>
@@ -163,6 +174,32 @@ export default function App() {
           </button>
         </div>
       </footer>
+
+      {showRulesModal && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4" onClick={() => setShowRulesModal(false)}>
+          <div className="bg-card rounded-3xl p-8 shadow-xl border border-primary/20 w-full max-w-sm relative" onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              onClick={() => setShowRulesModal(false)}
+              className="absolute top-4 right-4 text-muted-foreground/40 hover:text-muted-foreground/80 transition-colors"
+              aria-label="Fechar"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <h3 className="text-center mb-6" style={{ fontFamily: 'Georgia, serif', color: '#d4a574', fontSize: '1.3rem', fontStyle: 'italic' }}>
+              O jogo das 32 experiências
+            </h3>
+            <div className="space-y-4 text-sm leading-relaxed" style={{ fontFamily: 'Georgia, serif', color: '#6b5444' }}>
+              <p>Cada card corresponde a 1 ano de vida e para comemorar teremos diversas experiências que serão vividas.</p>
+              <p>O prazo de entrega será acordado com o mestre do jogo e a próxima experiência só pode ser desbloqueada quando a anterior for entregue.</p>
+              <p>Desfrute dos momentos.</p>
+            </div>
+            <p className="text-center mt-6 text-xs" style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', color: '#d4a574' }}>
+              com amor, Gui ♡
+            </p>
+          </div>
+        </div>
+      )}
 
       {showResetModal && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
