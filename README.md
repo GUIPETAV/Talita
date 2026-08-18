@@ -1,11 +1,27 @@
+# Site Romântico com Experiências
 
-  # Site romântico com experiências
+Projeto pessoal desenvolvido por Guilherme Henrique Peterlini Tavares.
 
-  This is a code bundle for Site romântico com experiências. The original project is available at https://www.figma.com/design/i1cELAz1dNEcjd5MEBgVpS/Site-rom%C3%A2ntico-com-experi%C3%AAncias.
+## Visão Geral
 
-  ## Running the code
+Aplicação web (bundle gerado a partir de um design no Figma) com experiências personalizadas.
 
-  Run `npm i` to install the dependencies.
+## Estrutura do Repositório
 
-  Run `npm run dev` to start the development server.
-  
+| Arquivo | Descrição |
+|---|---|
+| `dist/` | Build de produção usada no deploy |
+| `Procfile` | Configuração de deploy (Heroku) |
+| `ATTRIBUTIONS.md` | Créditos de recursos usados no projeto |
+
+## Como Usar
+
+Projeto em produção no Heroku — o nome do repositório foi mantido de propósito para não quebrar a integração de deploy.
+
+## Observações
+
+Repositório mantido público a pedido, pois está integrado ao deploy no Heroku. Nome não foi alterado por esse motivo.
+
+---
+
+Repositório: https://github.com/GUIPETAV/Talita
